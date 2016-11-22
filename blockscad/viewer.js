@@ -145,7 +145,7 @@ Blockscad.Viewer = function(containerelement, width, height, initialdepth) {
             shiftControl.removeClass('active shift-horizontal shift-vertical');
         }
     }).on("transformend dragstart dragend", function(e) {
-      if ((e.type == 'transformend' && _this.touch.cur == 'transforming') || 
+      if ((e.type == 'transformend' && _this.touch.cur == 'transforming') ||
           (e.type == 'dragend' && _this.touch.cur == 'shifting') ||
           (e.type == 'dragend' && _this.touch.cur == 'dragging'))
         _this.touch.cur = null;
@@ -161,12 +161,12 @@ Blockscad.Viewer = function(containerelement, width, height, initialdepth) {
     _this.onDraw();
   };
   gl.onmousewheel = function(e) {
-    var wheelDelta = 0;    
+    var wheelDelta = 0;
     if (e.wheelDelta) {
       wheelDelta = e.wheelDelta;
     } else if (e.detail) {
       // for firefox, see http://stackoverflow.com/questions/8886281/event-wheeldelta-returns-undefined
-      wheelDelta = e.detail * -40;     
+      wheelDelta = e.detail * -40;
     }
     if(wheelDelta) {
       wheelDelta /= 2;
@@ -261,7 +261,7 @@ Blockscad.Viewer.prototype = {
       this.viewpointY = 0;
       this.viewpointZ = 100;
     }
-    else if (whichView == "left") {    
+    else if (whichView == "left") {
       // back
       this.angleX = -90;
       this.angleY = 0;
@@ -270,7 +270,7 @@ Blockscad.Viewer.prototype = {
       this.viewpointY = 0;
       this.viewpointZ = 100;
     }
-    else if (whichView == "back") {    
+    else if (whichView == "back") {
       // left??
       this.angleX = -90;
       this.angleY = 0;
@@ -287,8 +287,8 @@ Blockscad.Viewer.prototype = {
 
   clear: function() {
     // empty mesh list:
-    this.meshes = []; 
-    this.onDraw();    
+    this.meshes = [];
+    this.onDraw();
   },
 
   supported: function() {
@@ -326,7 +326,7 @@ Blockscad.Viewer.prototype = {
     coeff *= 0.85;
     this.setZoom(coeff);
   },
-  
+
   onMouseMove: function(e) {
     if (e.dragging) {
       //console.log(e.which,e.button);
@@ -394,7 +394,7 @@ Blockscad.Viewer.prototype = {
         delta = e.gesture.deltaY - this.touch.lastY;
         this.viewpointY -= factor * delta * this.viewpointZ;
         this.angleX += delta;
-    } 
+    }
     if (this.touch.lastX && (e.gesture.direction == 'left' || e.gesture.direction == 'right')) {
         this.touch.shiftControl
           .removeClass('shift-vertical')
@@ -450,7 +450,7 @@ Blockscad.Viewer.prototype = {
     gl.perspective(45,gl.canvas.width / gl.canvas.height,1,3000);
     gl.matrixMode(gl.MODELVIEW);
     gl.loadIdentity();
-    gl.lookAt(bsph.center.x + r * Math.sin(angle), bsph.center.y + r * Math.cos(angle), bsph.center.z + tallness*r/2, 
+    gl.lookAt(bsph.center.x + r * Math.sin(angle), bsph.center.y + r * Math.cos(angle), bsph.center.z + tallness*r/2,
               bsph.center.x, bsph.center.y, bsph.center.z, 0,0,1);
     }
 
@@ -525,7 +525,7 @@ Blockscad.Viewer.prototype = {
                  gl.vertex(-0.5, 0, x);
                  gl.vertex(0.5, 0, x);
                  gl.vertex(0, -0.50, x);
-                 gl.vertex(0, 0.50, x); 
+                 gl.vertex(0, 0.50, x);
                }
             }
          }
@@ -560,7 +560,7 @@ Blockscad.Viewer.prototype = {
       if(1) {
          //X - red
 
-   
+
         gl.color(1, 0, 0, 1); //positive direction
         gl.vertex(0, 0, 0);
         gl.vertex(plate/2, 0, 0);
@@ -585,7 +585,7 @@ Blockscad.Viewer.prototype = {
             gl.vertex(0,i+1,0);
           }
         }
-  
+
         gl.color(0.1, 0.1, 0.4, 1); //positive direction
         gl.vertex(0, 0, 0);
         gl.vertex(0, 0, plate/2.8);
@@ -595,7 +595,7 @@ Blockscad.Viewer.prototype = {
             gl.vertex(0,0,i);
             gl.vertex(0,0,i+1);
           }
-        }        
+        }
       }
 
       if(1) {
@@ -607,17 +607,17 @@ Blockscad.Viewer.prototype = {
         gl.color(0,0,0,1);  // black?
         gl.vertex(plate/2 + 1*plate/sf,-1*plate/sf,0);
         gl.vertex(plate/2 + 3*plate/sf,1*plate/sf,0);
-        
+
         gl.vertex(plate/2+1*plate/sf,1*plate/sf,0);
         gl.vertex(plate/2+3*plate/sf,-1*plate/sf,0);
 
         // drawing in a "y" - JY
         gl.vertex(-1*plate/sf,plate/2 + 4*plate/sf,0);
         gl.vertex(0,plate/2+3*plate/sf,0);
-        
+
         gl.vertex(0,plate/2+3*plate/sf,0);
         gl.vertex(1*plate/sf,plate/2+4*plate/sf,0);
-        
+
         gl.vertex(0,plate/2+1*plate/sf,0);
         gl.vertex(0,plate/2+3*plate/sf,0);
 
@@ -669,14 +669,14 @@ Blockscad.Viewer.prototype = {
       return image;
     }
 
-    
+
   },
   // quality is the jpeg quality level (between 0 and 1).  Note that a value of 0
   // won't take a pic at all, because it is used as a true/false to take the pic.
   takePic: function(quality, angle) {
       return this.onDraw(quality, angle);
   },
-  
+
   // new function for taking a screen shot
   takeCameraPic: function(quality) {
       return this.onDraw(0,0,quality);
@@ -733,7 +733,7 @@ Blockscad.Viewer.csgToMeshes = function(initial_csg, defaultColor) {
     }
     // if too many vertices, start a new mesh;
     if (vertices.length > 65000) {
-      // finalize the old mesh	
+      // finalize the old mesh
       mesh.triangles = triangles;
       mesh.vertices = vertices;
       mesh.colors = colors;
@@ -744,7 +744,7 @@ Blockscad.Viewer.csgToMeshes = function(initial_csg, defaultColor) {
       triangles = [];
       colors = [];
       vertices = [];
-      meshes.push(mesh);	
+      meshes.push(mesh);
     }
   }
   // finalize last mesh
@@ -776,7 +776,7 @@ Blockscad.makeAbsoluteUrl = function(url, baseurl) {
       } else {
         comps2.push(c);
       }
-    });  
+    });
     url = "";
     for(var i = 0; i < comps2.length; i++) {
       if(i > 0) url += "/";
@@ -795,7 +795,7 @@ Blockscad.isChrome = function() {
 Blockscad.runMainInWorker = function() {
   try {
     if(typeof(main) != 'function') throw new Error('Your file should contain a function main() which returns a CSG solid or a CAG area.');
-  
+
     var result = main();
     if( (typeof(result) != "object") || ((!(result instanceof CSG)) && (!(result instanceof CAG)))) {
       throw new Error("Nothing to Render!");
@@ -813,8 +813,8 @@ Blockscad.runMainInWorker = function() {
           o = o.unionForNonIntersecting(c);
        }
        result = o;
-    } 
-    var result_compact = result.toCompactBinary();   
+    }
+    var result_compact = result.toCompactBinary();
     result = null; // not needed anymore
     self.postMessage({cmd: 'rendered', result: result_compact});
   }
@@ -829,7 +829,7 @@ Blockscad.parseBlockscadScriptSync = function(script, debugging) {
   workerscript += "_includePath = "+JSON.stringify(_includePath)+";\n";
   workerscript += script;
   // workerscript += "var me = " + JSON.stringify(me) + ";\n";
-  workerscript += "return main();";  
+  workerscript += "return main();";
 // trying to get include() somewhere:
 // 1) XHR works for SYNC <---
 // 2) importScripts() does not work in SYNC
@@ -865,7 +865,7 @@ Blockscad.parseBlockscadScriptSync = function(script, debugging) {
 "}";
 
   var f = new Function(workerscript);
-  
+
   return f();                     // execute the actual code
 
 };
@@ -880,7 +880,7 @@ Blockscad.parseBlockscadScriptASync = function(script, callback) {
 
   // console.log("in parseBlockscadScriptASync");
   var baseurl = document.location.href.replace(/\?.*$/, '');
-  baseurl = baseurl.replace(/#.*$/,'');        // remove remote URL 
+  baseurl = baseurl.replace(/#.*$/,'');        // remove remote URL
   var blockscadurl = baseurl;
 
   var libraries = [];
@@ -905,9 +905,9 @@ Blockscad.parseBlockscadScriptASync = function(script, callback) {
   // for(var fn in gMemFs) {
   //    workerscript += "// "+gMemFs[fn].name+":\n";
   //    //workerscript += gMemFs[i].source+"\n";
-  //    if(!mainFile) 
+  //    if(!mainFile)
   //       mainFile = fn;
-  //    if(fn=='main.jscad'||fn.match(/\/main.jscad$/)) 
+  //    if(fn=='main.jscad'||fn.match(/\/main.jscad$/))
   //       mainFile = fn;
   //    workerscript += "gMemFs[\""+gMemFs[fn].name+"\"] = "+JSON.stringify(gMemFs[fn].source)+";\n";
   //    ignoreInclude = true;
@@ -934,7 +934,7 @@ Blockscad.parseBlockscadScriptASync = function(script, callback) {
   workerscript += "}},false);\n";
 
 
-// trying to get include() somewhere: 
+// trying to get include() somewhere:
 // 1) XHR fails: not allowed in blobs
 // 2) importScripts() works for ASYNC <----
 // 3) _csg_libraries.push(fn) provides only 1 level include()
@@ -972,12 +972,12 @@ Blockscad.parseBlockscadScriptASync = function(script, callback) {
   var blobURL = Blockscad.textToBlobUrl(workerscript);
   // console.log("blobURL",blobURL);
    // console.log("workerscript",workerscript);
-  
+
   if(!window.Worker) throw new Error("Your browser doesn't support Web Workers. Please try the Chrome or Firefox browser instead.");
   var worker = new Worker(blobURL);
   worker.onmessage = function(e) {
     if(e.data)
-    { 
+    {
       if(e.data.cmd == 'rendered')
       {
         var resulttype = e.data.result.class;
@@ -1026,7 +1026,7 @@ Blockscad.textToBlobUrl = function(txt) {
   var windowURL=Blockscad.getWindowURL();
   var blob = new Blob([txt]);
   var blobURL = windowURL.createObjectURL(blob);
-  if(!blobURL) throw new Error("createObjectURL() failed"); 
+  if(!blobURL) throw new Error("createObjectURL() failed");
   return blobURL;
 };
 
@@ -1077,7 +1077,7 @@ Blockscad.Processor.convertToSolid = function(obj) {
   } else if( (typeof(obj) == "object") && ((obj instanceof CSG)) ) {
     // obj already is a solid, nothing to do
     ;
-    
+
   } else if(obj.length) {                   // main() return an array, we consider it a bunch of CSG not intersecting
     console.log("putting them together");
     var o = obj[0];
@@ -1085,7 +1085,7 @@ Blockscad.Processor.convertToSolid = function(obj) {
        o = o.unionForNonIntersecting(obj[i]);
     }
     obj = o;
-    
+
   } else {
     throw new Error("Cannot convert to solid");
   }
@@ -1096,7 +1096,7 @@ Blockscad.Processor.prototype = {
   createElements: function() {
     var that = this;   // for event handlers
 
-   // JY - I added a "reset view" button.  
+   // JY - I added a "reset view" button.
    // now, the container (content-render) HAS A CHILD FROM THE REST OF THE HTML (my reset view button)
    // this code throws an error if I try to throw that child away. SO, I always leave the first
    // child.
@@ -1107,8 +1107,8 @@ Blockscad.Processor.prototype = {
       }
 
     var viewerdiv = document.createElement("div");
-    viewerdiv.style.width = '100%'; 
-    viewerdiv.style.height = '100%'; 
+    viewerdiv.style.width = '100%';
+    viewerdiv.style.height = '100%';
     viewerdiv.style.top = '0px';
     viewerdiv.style.position = 'absolute';
     viewerdiv.style.zIndex = '9';
@@ -1117,8 +1117,8 @@ Blockscad.Processor.prototype = {
 
     var picdiv = document.createElement("div");
     picdiv.setAttribute('id','picdiv');
-    picdiv.style.width = Blockscad.picSize[0] + 'px'; 
-    picdiv.style.height = Blockscad.picSize[1] + 'px'; 
+    picdiv.style.width = Blockscad.picSize[0] + 'px';
+    picdiv.style.height = Blockscad.picSize[1] + 'px';
     picdiv.style.top = '0px';
     picdiv.style.right = '10px';
     picdiv.style.position = 'absolute';
@@ -1128,8 +1128,8 @@ Blockscad.Processor.prototype = {
 
     var rpicdiv = document.createElement("div");
     rpicdiv.setAttribute('id','picdiv');
-    rpicdiv.style.width = Blockscad.rpicSize[0] + 'px'; 
-    rpicdiv.style.height = Blockscad.rpicSize[1] + 'px'; 
+    rpicdiv.style.width = Blockscad.rpicSize[0] + 'px';
+    rpicdiv.style.height = Blockscad.rpicSize[1] + 'px';
     rpicdiv.style.top = '0px';
     rpicdiv.style.right = '10px';
     rpicdiv.style.position = 'absolute';
@@ -1166,21 +1166,31 @@ Blockscad.Processor.prototype = {
     this.abortbutton.onclick = function(e) {
       that.abort();
       // I want to turn the render button back on!
-      $('#renderButton').prop('disabled', false); 
+      $('#renderButton').prop('disabled', false);
 
     };
 
-    this.formatDropdown = document.getElementById("render-type");
-    this.formatDropdown.onchange = function(e) {
-      that.currentFormat = that.formatDropdown.options[that.formatDropdown.selectedIndex].value;
-      that.updateDownloadLink();
-    };
-    this.generateOutputFileButton = document.getElementById("stlButton");
+
+    this.generateOutputFileButton = document.getElementById("printButton");
     this.generateOutputFileButton.onclick = function(e) {
-      that.generateOutputFile();
+
+    var thumb;
+    var stlFile = that.currentObjectToBlob();
+
+    var formData = new FormData();
+    var blob = new Blob([stlFile], {type: 'plain/text'});
+    formData.append('file', blob, $("#project-name").val().concat(".STL"));
+
+    var request = new XMLHttpRequest();
+    request.open("POST", "/uploadStl");
+    request.send(formData);
+
+    //alert("File saved as: ".concat($("#project-name").val().concat(".STL")));
+    window.location.href="/#tabprint";
+
     };
 
-    this.enableItems();    
+    this.enableItems();
     // this.clearViewer();
   },
 
@@ -1196,7 +1206,7 @@ Blockscad.Processor.prototype = {
   //   for (var i = 0; i < this.currentObject.polygons.length; i++) {
   //     for (var j = 0; j < this.currentObject.polygons[i].vertices.length; j++) {
   //       var v = this.currentObject.polygons[i].vertices[j];
-  //       sphere.radius = Math.max(sphere.radius, 
+  //       sphere.radius = Math.max(sphere.radius,
   //         new CSG.Vector3D(v.pos.x, v.pos.y, v.pos.z).minus(sphere.center).lengthSquared());
   //     }
   //   }
@@ -1224,21 +1234,21 @@ Blockscad.Processor.prototype = {
 
     // console.log("trying to turn on stl_buttons");
     $('#stl_buttons').removeClass('hidden');
-    
-    while(this.formatDropdown.options.length > 0)
-      this.formatDropdown.options.remove(0);
-    
-    var that = this;
-    this.supportedFormatsForCurrentObject().forEach(function(format) {
-      var option = document.createElement("option");
-      option.setAttribute("value", format);
-      option.appendChild(document.createTextNode(that.formatInfo(format).displayName));
-      that.formatDropdown.options.add(option);
-    });
-    
-    this.updateDownloadLink();
+
+    // while(this.formatDropdown.options.length > 0)
+    //   this.formatDropdown.options.remove(0);
+    //
+    // var that = this;
+    // this.supportedFormatsForCurrentObject().forEach(function(format) {
+    //   var option = document.createElement("option");
+    //   option.setAttribute("value", format);
+    //   option.appendChild(document.createTextNode(that.formatInfo(format).displayName));
+    //   that.formatDropdown.options.add(option);
+    // });
+
+    // this.updateDownloadLink();
   },
-  
+
   selectedFormat: function() {
     return this.formatDropdown.options[this.formatDropdown.selectedIndex].value;
   },
@@ -1246,12 +1256,12 @@ Blockscad.Processor.prototype = {
   selectedFormatInfo: function() {
     return this.formatInfo(this.selectedFormat());
   },
-  
+
   updateDownloadLink: function() {
     var ext = this.selectedFormatInfo().extension;
     this.generateOutputFileButton.innerHTML = Blockscad.Msg.GENERATE_STL + " "+ext.toUpperCase();
   },
-  
+
   clearViewer: function() {
     this.clearOutputFile();
     this.setCurrentObject(new CSG());
@@ -1263,7 +1273,7 @@ Blockscad.Processor.prototype = {
     $('#stl_buttons').addClass('hidden');
     this.enableItems();
   },
-  
+
   abort: function() {
     if(this.processing)
     {
@@ -1275,25 +1285,25 @@ Blockscad.Processor.prototype = {
       if(this.onchange) this.onchange();
     }
   },
-  
+
   enableItems: function() {
     this.abortbutton.style.display = this.processing? "inline-block":"none";
     this.renderbutton.style.display = this.processing? "none":"inline-block";
     this.ongoingrender.style.display = this.processing? "inline-block":"none";
   },
 
- 
+
   setError: function(txt) {
     this.hasError = (txt != "");
     $( "#error-message" ).text(txt);
-   // console.log("in setError with text", txt, "this.hasError is", this.hasError); 
+   // console.log("in setError with text", txt, "this.hasError is", this.hasError);
     this.enableItems();
   },
-  
+
   setDebugging: function(debugging) {
     this.debugging = debugging;
   },
-  
+
   // clear the viewer, build/display a mesh
   setBlockscad: function(script) {
     this.abort();
@@ -1301,7 +1311,7 @@ Blockscad.Processor.prototype = {
     this.script = script;
     this.rebuildSolid();
   },
-  
+
 
   rebuildSolid: function()
   {
@@ -1354,7 +1364,7 @@ Blockscad.Processor.prototype = {
         useSync = true;
       }
     }
-    
+
     if(useSync)
     {
       try
@@ -1377,7 +1387,7 @@ Blockscad.Processor.prototype = {
       if(that.onchange) that.onchange();
     }
   },
-  
+
   hasSolid: function() {
     return this.hasValidCurrentObject;
   },
@@ -1385,7 +1395,7 @@ Blockscad.Processor.prototype = {
   isProcessing: function() {
     return this.processing;
   },
-   
+
   clearOutputFile: function() {
     if(this.hasOutputFile)
     {
@@ -1408,19 +1418,20 @@ Blockscad.Processor.prototype = {
   },
 
   currentObjectToBlob: function() {
-    var format = this.selectedFormat();
+//    var format = this.selectedFormat();
+    var format = "stla";
 
     var blob;
-    if(format == "stla") {      
-      blob = this.currentObject.toStlString();      
-      // console.log("this format mimetype is:", this.formatInfo(format).mimetype); 
+    if(format == "stla") {
+      blob = this.currentObject.toStlString();
+      // console.log("this format mimetype is:", this.formatInfo(format).mimetype);
       blob = new Blob([blob],{ type: "text/plain; charset=utf-8"});
     }
-    else if(format == "stlb") {      
-      blob = this.currentObject.toStlBinary({webBlob: true});     
+    else if(format == "stlb") {
+      blob = this.currentObject.toStlBinary({webBlob: true});
 
       // -- binary string -> blob gives bad data, so we request cgs.js already blobbing the binary
-      //blob = new Blob([blob],{ type: this.formatInfo(format).mimetype+"/charset=UTF-8" }); 
+      //blob = new Blob([blob],{ type: this.formatInfo(format).mimetype+"/charset=UTF-8" });
     }
     else if(format == "amf") {
       blob = this.currentObject.toAMFString({
@@ -1428,7 +1439,7 @@ Blockscad.Processor.prototype = {
         date: new Date()
       });
       blob = new Blob([blob],{ type: "text/plain; charset=utf-8"});
-    }  
+    }
     else if(format == "x3d") {
       blob = this.currentObject.toX3D();
       blob = new Blob([blob],{ type: "text/plain; charset=utf-8"});
@@ -1443,14 +1454,14 @@ Blockscad.Processor.prototype = {
     }
     else {
       throw new Error("Not supported");
-    }    
+    }
     return blob;
   },
-  
+
   supportedFormatsForCurrentObject: function() {
     if (this.currentObject instanceof CSG) {
       // if safari, don't let them save stlb
-      if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) 
+      if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1)
         return ["stla", "amf", "x3d"];
       return ["stlb", "stla", "x3d", "obj", "amf"];
     } else if (this.currentObject instanceof CAG) {
@@ -1459,7 +1470,7 @@ Blockscad.Processor.prototype = {
       throw new Error("Not supported");
     }
   },
-  
+
   formatInfo: function(format) {
     return {
       stla: {
@@ -1519,7 +1530,7 @@ Blockscad.Processor.prototype = {
     c.width  = Blockscad.rpicSize[0] * numframes;
     c.height = Blockscad.rpicSize[0];
     var ctx = c.getContext("2d");
-    
+
     for (var i = 0; i < numframes; i += 1) {
       var angle = -i * (2*Math.PI / numframes);
       frames[i] = this.rpicviewer.takePic(quality,angle)[0];
