@@ -1,6 +1,5 @@
 *~
 auth.js
-closure-library/*
 node_modules/*
 build/*
 cache/*
